@@ -1,0 +1,4 @@
+const menuButton=document.getElementById('mobile-menu');const mobileNav=document.getElementById('mobile-nav');menuButton?.addEventListener('click',()=>{const isOpen=mobileNav.classList.toggle('open');menuButton.setAttribute('aria-expanded',String(isOpen))});mobileNav?.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{mobileNav.classList.remove('open');menuButton?.setAttribute('aria-expanded','false')}));const copyButton=document.getElementById('copy-command');copyButton?.addEventListener('click',async()=>{const command=`git clone https://github.com/flufox/jnicq-hermes-todolist.git
+cd jnicq-hermes-todolist
+npm ci
+npm run dev:demo`;try{await navigator.clipboard.writeText(command);copyButton.textContent='Copied';setTimeout(()=>{copyButton.textContent='Copy'},1600)}catch{copyButton.textContent='Select text'}});
