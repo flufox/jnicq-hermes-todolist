@@ -1,0 +1,72 @@
+{
+  "name": "jnicq-hermes-todolist",
+  "version": "0.1.0",
+  "description": "The visual task layer for Hermes Agent.",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flufox/jnicq-hermes-todolist.git"
+  },
+  "homepage": "https://github.com/flufox/jnicq-hermes-todolist#readme",
+  "bugs": {
+    "url": "https://github.com/flufox/jnicq-hermes-todolist/issues"
+  },
+  "keywords": [
+    "hermes-agent",
+    "telegram-mini-app",
+    "self-hosted",
+    "task-manager",
+    "household"
+  ],
+  "scripts": {
+    "dev": "concurrently -k \"vite --host 127.0.0.1\" \"cross-env NODE_ENV=development HERMES_TODO_HOST=127.0.0.1 tsx watch server-src/index.ts\"",
+    "dev:demo": "concurrently -k \"vite --host 127.0.0.1\" \"cross-env NODE_ENV=development HERMES_TODO_HOST=127.0.0.1 HERMES_TODO_DEMO_AUTH=true tsx watch server-src/index.ts\"",
+    "build": "npm run build:server && vite build",
+    "build:server": "tsc -p tsconfig.node.json",
+    "start": "cross-env NODE_ENV=production node server/server-src/index.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:python": "python -m unittest discover -s hermes_todo_plugin -p \"test_*.py\"",
+    "release:scan": "python scripts/release_allowlist.py",
+    "setup": "tsx cli/index.ts setup",
+    "doctor": "tsx cli/index.ts doctor",
+    "backup": "tsx cli/index.ts backup",
+    "restore": "tsx cli/index.ts restore",
+    "invite-admin": "tsx cli/index.ts invite-admin",
+    "rotate-token": "tsx cli/index.ts rotate-token"
+  },
+  "dependencies": {
+    "better-sqlite3": "^13.0.2",
+    "compression": "^1.8.1",
+    "dotenv": "^16.4.7",
+    "express": "^5.1.0",
+    "express-rate-limit": "^7.5.0",
+    "helmet": "^8.1.0",
+    "lucide-react": "^0.468.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.12",
+    "@types/compression": "^1.7.5",
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@types/supertest": "^6.0.3",
+    "@vitejs/plugin-react": "^4.3.4",
+    "concurrently": "^9.1.2",
+    "cross-env": "^7.0.3",
+    "supertest": "^7.1.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.5",
+    "vitest": "^4.1.0"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

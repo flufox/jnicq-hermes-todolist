@@ -1,0 +1,21 @@
+name: hermes-todo
+version: 0.1.0
+description: "The visual task layer for Hermes Agent: shared, recoverable workspace tasks."
+author: jnicq contributors
+kind: standalone
+platforms:
+  - linux
+requires_env:
+  - name: HERMES_TODO_API_URL
+    description: "Public HTTPS origin of your Hermes Todo instance (without /api/agent/v1)"
+    secret: false
+  - name: HERMES_TODO_API_TOKEN
+    description: "Scoped token from secrets/hermes_agent_token"
+    secret: true
+provides_tools:
+  - hermes_todo_list_members
+  - hermes_todo_list_tasks
+  - hermes_todo_create_task
+  - hermes_todo_update_task
+  - hermes_todo_complete_task
+  - hermes_todo_archive_task

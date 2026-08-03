@@ -1,0 +1,13 @@
+# Security-sensitive changes require review from the public repository owner.
+/.github/workflows/ @jnicq
+/Dockerfile @jnicq
+/compose.yaml @jnicq
+/Caddyfile @jnicq
+/SECURITY.md @jnicq
+/server-src/app.ts @jnicq
+/server-src/config.ts @jnicq
+/server-src/database.ts @jnicq
+/server-src/google.ts @jnicq
+/server-src/telegram-auth.ts @jnicq
+/server-src/backup.ts @jnicq
+/hermes_todo_plugin/ @jnicq

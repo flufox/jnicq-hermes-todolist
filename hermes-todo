@@ -1,0 +1,42 @@
+#!/bin/sh
+set -eu
+
+if command -v node >/dev/null 2>&1 && [ -f "server/cli/index.js" ]; then
+  exec node server/cli/index.js "$@"
+fi
+
+case "${1:-}" in
+  setup)
+    umask 077
+    mkdir -p data backups secrets
+    chmod 700 data backups secrets
+    docker compose --profile setup build setup
+    docker compose --profile setup run --rm setup "$@"
+    docker compose up -d --wait
+    if command -v hermes >/dev/null 2>&1 && hermes --version 2>/dev/null | grep -q '0\.16\.'; then
+      printf 'Hermes 0.16.x detected. Install and enable the Hermes Todo plugin? [y/N] '
+      read -r answer
+      case "$answer" in
+        y|Y|yes|YES)
+          hermes_todo_public_url="$(sed -n 's/^HERMES_TODO_PUBLIC_URL=//p' .env)"
+          unset HERMES_TODO_API_URL HERMES_TODO_API_TOKEN
+          hermes config set HERMES_TODO_API_TOKEN "$(tr -d '\r\n' < secrets/hermes_agent_token)"
+          printf 'When prompted for HERMES_TODO_API_URL, enter: %s\n' "$hermes_todo_public_url"
+          hermes plugins install https://github.com/flufox/jnicq-hermes-todolist.git --enable
+          hermes plugins list
+          if ! hermes gateway restart; then
+            printf 'Plugin installed. Start or restart the Hermes gateway before testing it.\n'
+          fi
+          ;;
+      esac
+    fi
+    ;;
+  update)
+    docker compose --profile setup run --rm setup backup
+    docker compose pull
+    docker compose up -d --wait --remove-orphans
+    ;;
+  *)
+    exec docker compose --profile setup run --rm setup "$@"
+    ;;
+esac

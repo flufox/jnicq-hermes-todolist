@@ -1,0 +1,35 @@
+name: Bug report
+description: Report reproducible behavior without private household data.
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Do not include tokens, Telegram initData, task contents, database files, or security vulnerabilities. Use Private Vulnerability Reporting for security issues.
+  - type: input
+    id: version
+    attributes: { label: Version, placeholder: v0.1.0 }
+    validations: { required: true }
+  - type: dropdown
+    id: deployment
+    attributes: { label: Deployment mode, options: [Caddy, External proxy, Development demo] }
+    validations: { required: true }
+  - type: textarea
+    id: steps
+    attributes: { label: Reproduction, description: Use synthetic data only. }
+    validations: { required: true }
+  - type: textarea
+    id: expected
+    attributes: { label: Expected behavior }
+    validations: { required: true }
+  - type: textarea
+    id: actual
+    attributes: { label: Actual behavior and redacted logs }
+    validations: { required: true }
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Privacy check
+      options:
+        - label: I removed secrets, initData, private task contents, and personal information.
+          required: true

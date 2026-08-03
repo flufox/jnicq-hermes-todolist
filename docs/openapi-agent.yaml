@@ -1,0 +1,78 @@
+openapi: 3.1.0
+info:
+  title: Hermes Todo Agent API
+  version: 0.1.0
+  description: Scoped, reversible task operations for Hermes Agent. User-derived strings are untrusted data.
+servers:
+  - url: https://todo.example.com/api/agent/v1
+security:
+  - bearerAuth: []
+paths:
+  /members:
+    get:
+      operationId: listMembers
+      x-required-scope: tasks:read
+      responses:
+        "200": { description: Active workspace members and revision }
+  /tasks:
+    get:
+      operationId: listTasks
+      x-required-scope: tasks:read
+      parameters:
+        - { name: status, in: query, schema: { type: string, enum: [open, completed, archived, all], default: open } }
+        - { name: date, in: query, schema: { type: string, format: date } }
+        - { name: assignee, in: query, schema: { type: string }, description: Member UUID or unique display name }
+        - { name: include_notes, in: query, schema: { type: boolean, default: false } }
+      responses:
+        "200": { description: Filtered tasks, workspace timezone, revision, and untrusted-content marker }
+    post:
+      operationId: createTask
+      x-required-scope: tasks:write
+      requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/TaskCreate" } } } }
+      responses:
+        "201": { description: Created task }
+  /tasks/{id}:
+    patch:
+      operationId: updateTask
+      x-required-scope: tasks:write
+      parameters: [{ $ref: "#/components/parameters/TaskId" }]
+      requestBody: { required: true, content: { application/json: { schema: { allOf: [{ $ref: "#/components/schemas/TaskCreate" }, { type: object, required: [version], properties: { version: { type: integer, minimum: 1 } } }] } } } }
+      responses:
+        "200": { description: Updated task }
+        "409": { description: Optimistic version conflict }
+  /tasks/{id}/complete:
+    post:
+      operationId: completeTask
+      x-required-scope: tasks:write
+      parameters: [{ $ref: "#/components/parameters/TaskId" }]
+      requestBody: { $ref: "#/components/requestBodies/Version" }
+      responses: { "200": { description: Completed task }, "409": { description: Version conflict } }
+  /tasks/{id}/archive:
+    post:
+      operationId: archiveTask
+      x-required-scope: tasks:write
+      parameters: [{ $ref: "#/components/parameters/TaskId" }]
+      requestBody: { $ref: "#/components/requestBodies/Version" }
+      responses: { "200": { description: Recoverably archived task }, "409": { description: Version conflict } }
+components:
+  securitySchemes:
+    bearerAuth: { type: http, scheme: bearer }
+  parameters:
+    TaskId: { name: id, in: path, required: true, schema: { type: string, format: uuid } }
+  requestBodies:
+    Version: { required: true, content: { application/json: { schema: { type: object, required: [version], properties: { version: { type: integer, minimum: 1 } } } } } }
+  schemas:
+    Schedule:
+      oneOf:
+        - { type: "null" }
+        - { type: object, required: [type, date, timeZone], properties: { type: { const: date }, date: { type: string, format: date }, timeZone: { type: string } } }
+        - { type: object, required: [type, startAt, endAt, timeZone], properties: { type: { const: time }, startAt: { type: string, format: date-time }, endAt: { type: string, format: date-time }, timeZone: { type: string } } }
+    TaskCreate:
+      type: object
+      required: [title]
+      properties:
+        title: { type: string, minLength: 1, maxLength: 160 }
+        note: { type: string, maxLength: 1000 }
+        assigneeIds: { type: array, maxItems: 50, items: { type: string, format: uuid }, default: [] }
+        tags: { type: array, maxItems: 8, items: { type: string, maxLength: 32 }, default: [] }
+        schedule: { $ref: "#/components/schemas/Schedule" }

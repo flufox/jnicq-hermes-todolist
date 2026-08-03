@@ -1,0 +1,23 @@
+name: Feature request
+description: Suggest a focused improvement for a self-hosted workspace.
+title: "[Feature]: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes: { label: Problem, description: What job is difficult today? }
+    validations: { required: true }
+  - type: textarea
+    id: proposal
+    attributes: { label: Proposed behavior }
+    validations: { required: true }
+  - type: textarea
+    id: security
+    attributes: { label: Privacy and security impact }
+    validations: { required: true }
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope
+      options:
+        - label: This fits a single-workspace, self-hosted product and does not require SaaS or multitenancy.

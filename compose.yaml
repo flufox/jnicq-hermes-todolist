@@ -1,0 +1,148 @@
+name: hermes-todo
+
+x-hardened: &hardened
+  restart: unless-stopped
+  read_only: true
+  cap_drop: [ALL]
+  security_opt:
+    - no-new-privileges:true
+  tmpfs:
+    - /tmp:rw,noexec,nosuid,size=32m
+
+x-app-environment: &app-environment
+  NODE_ENV: production
+  HERMES_TODO_HOST: 0.0.0.0
+  HERMES_TODO_PORT: "3000"
+  HERMES_TODO_PUBLIC_URL: https://${HERMES_TODO_DOMAIN:-setup.invalid}
+  HERMES_TODO_DATABASE_PATH: /app/data/hermes-todo.sqlite
+  HERMES_TODO_BACKUP_DIRECTORY: /app/backups
+  HERMES_TODO_MASTER_KEY_PATH: /run/secrets/master_key
+  HERMES_TODO_TELEGRAM_BOT_TOKEN_FILE: /run/secrets/telegram_bot_token
+  TZ: ${HERMES_TODO_TIMEZONE:-UTC}
+
+services:
+  app:
+    <<: *hardened
+    image: ghcr.io/flufox/hermes-todo:${HERMES_TODO_VERSION:-0.1.0}
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: runtime
+    environment: *app-environment
+    expose: ["3000"]
+    volumes:
+      - database:/app/data
+      - backups:/app/backups
+    secrets:
+      - source: telegram_bot_token
+        target: telegram_bot_token
+      - source: master_key
+        target: master_key
+
+  backups:
+    <<: *hardened
+    image: ghcr.io/flufox/hermes-todo:${HERMES_TODO_VERSION:-0.1.0}
+    command: ["node", "server/server-src/backup-worker.js"]
+    environment:
+      HERMES_TODO_DATABASE_PATH: /app/data/hermes-todo.sqlite
+      HERMES_TODO_BACKUP_DIRECTORY: /app/backups
+      TZ: ${HERMES_TODO_TIMEZONE:-UTC}
+    volumes:
+      - database:/app/data:ro
+      - backups:/app/backups
+    healthcheck:
+      test: ["CMD", "node", "-e", "try { process.kill(1, 0) } catch { process.exit(1) }"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+    depends_on:
+      app:
+        condition: service_healthy
+
+  caddy:
+    <<: *hardened
+    image: caddy:2.10.0-alpine@sha256:ae4458638da8e1a91aafffb231c5f8778e964bca650c8a8cb23a7e8ac557aa3c
+    profiles: [caddy]
+    cap_add: [NET_BIND_SERVICE]
+    environment:
+      HERMES_TODO_DOMAIN: ${HERMES_TODO_DOMAIN}
+      HERMES_TODO_ACME_EMAIL: ${HERMES_TODO_ACME_EMAIL}
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      app:
+        condition: service_healthy
+
+  external-proxy:
+    <<: *hardened
+    image: caddy:2.10.0-alpine@sha256:ae4458638da8e1a91aafffb231c5f8778e964bca650c8a8cb23a7e8ac557aa3c
+    profiles: [external-proxy]
+    cap_add: [NET_BIND_SERVICE]
+    command: ["caddy", "reverse-proxy", "--from", ":3000", "--to", "app:3000"]
+    ports:
+      - "127.0.0.1:${HERMES_TODO_EXTERNAL_PORT:-3000}:3000"
+    volumes:
+      - caddy_config:/config
+    depends_on:
+      app:
+        condition: service_healthy
+
+  calendar:
+    <<: *hardened
+    image: ghcr.io/flufox/hermes-todo:${HERMES_TODO_VERSION:-0.1.0}
+    profiles: [calendar]
+    command: ["node", "server/server-src/calendar-worker.js"]
+    environment:
+      HERMES_TODO_DATABASE_PATH: /app/data/hermes-todo.sqlite
+      HERMES_TODO_MASTER_KEY_PATH: /run/secrets/master_key
+      HERMES_TODO_CALENDAR_POLL_MS: ${HERMES_TODO_CALENDAR_POLL_MS:-30000}
+    volumes:
+      - database:/app/data
+    secrets:
+      - source: master_key
+        target: master_key
+    healthcheck:
+      test: ["CMD", "node", "-e", "try { process.kill(1, 0) } catch { process.exit(1) }"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+    depends_on:
+      app:
+        condition: service_healthy
+
+  setup:
+    image: ghcr.io/flufox/hermes-todo:${HERMES_TODO_VERSION:-0.1.0}
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: runtime
+    profiles: [setup]
+    working_dir: /workspace
+    entrypoint: ["node", "/app/server/cli/index.js"]
+    environment:
+      HERMES_TODO_SETUP_NO_START: "1"
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./:/workspace
+      - database:/workspace/data
+      - backups:/workspace/backups
+      - ./secrets:/workspace/secrets
+
+secrets:
+  telegram_bot_token:
+    file: ./secrets/telegram_bot_token
+  master_key:
+    file: ./secrets/master.key
+
+volumes:
+  database:
+  backups:
+  caddy_data:
+  caddy_config:
