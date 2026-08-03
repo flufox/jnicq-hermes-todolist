@@ -84,6 +84,9 @@ describe("production deployment hardening", () => {
     expect(launcher).not.toContain("hermes plugins install . --enable");
     expect(ciWorkflow.match(/hermes plugins install \"file:\/\/\$GITHUB_WORKSPACE\" --enable/g)).toHaveLength(2);
     expect(ciWorkflow).not.toContain("todo.example.invalid/api/agent/v1");
+    expect(ciWorkflow).not.toContain("cache: pip");
+    expect(ciWorkflow).toContain("repository: NousResearch/hermes-agent");
+    expect(ciWorkflow).toContain("python -m pip install -e ./.hermes-agent");
   });
 
   test("setup prepares private writable host directories before mounting them", () => {
