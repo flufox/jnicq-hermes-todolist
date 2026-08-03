@@ -62,7 +62,7 @@
     "cross-env": "^7.0.3",
     "supertest": "^7.1.1",
     "tsx": "^4.19.2",
-    "typescript": "^5.7.2",
+    "typescript": "^7.0.2",
     "vite": "^6.0.5",
     "vitest": "^4.1.0"
   },
