@@ -9,7 +9,7 @@
 <p>
   <a href="https://github.com/flufox/jnicq-hermes-todolist/actions/workflows/ci.yml"><img src="https://github.com/flufox/jnicq-hermes-todolist/actions/workflows/ci.yml/badge.svg" alt="Status CI" /></a>
   <a href="https://github.com/flufox/jnicq-hermes-todolist/actions/workflows/security.yml"><img src="https://github.com/flufox/jnicq-hermes-todolist/actions/workflows/security.yml/badge.svg" alt="Status pemeriksaan keamanan" /></a>
-  <a href="CHANGELOG.md"><img src="https://img.shields.io/badge/status-v0.1.0--rc-c65b4b" alt="Kandidat rilis v0.1.0" /></a>
+  <a href="CHANGELOG.md"><img src="https://img.shields.io/badge/status-v0.1.0-c65b4b" alt="Rilis v0.1.0" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-252826" alt="Lisensi MIT" /></a>
 </p>
 
@@ -173,9 +173,9 @@ Uji koneksi dengan permintaan yang aman, misalnya:
 
 Tugas akan muncul di Mini App. Skrip penyiapan tidak memasang Hermes itu sendiri; pemasangan plugin mengikuti [alur plugin resmi Hermes](https://github.com/NousResearch/hermes-agent/blob/main/website/docs/user-guide/features/plugins.md).
 
-## Yang tersedia dalam kandidat rilis v0.1.0
+## Yang tersedia dalam v0.1.0
 
-`v0.1.0` adalah kandidat rilis publik pertama. Alur inti tugas bersama telah dibuat dan diuji secara lokal; tag final masih menunggu pemeriksaan Docker runtime nyata serta integrasi Telegram/Hermes. Masukan, laporan bug, dan kontribusi pertama sudah diterima sekarang.
+`v0.1.0` adalah rilis publik pertama. Alur inti tugas bersama, pemeriksaan otomatis, dan Docker runtime lokal telah diverifikasi. Setiap instalasi publik tetap perlu menguji domain/TLS-nya sendiri serta alur Telegram-ke-Hermes secara langsung. Masukan, laporan bug, dan kontribusi pertama sangat diterima.
 
 - satu ruang kerja bersama dengan peran admin dan anggota;
 - pembuatan, penyuntingan, penyelesaian, pemulihan, dan pengarsipan tugas;

@@ -9,7 +9,7 @@
 <p>
   <a href="https://github.com/flufox/jnicq-hermes-todolist/actions/workflows/ci.yml"><img src="https://github.com/flufox/jnicq-hermes-todolist/actions/workflows/ci.yml/badge.svg" alt="CI status" /></a>
   <a href="https://github.com/flufox/jnicq-hermes-todolist/actions/workflows/security.yml"><img src="https://github.com/flufox/jnicq-hermes-todolist/actions/workflows/security.yml/badge.svg" alt="Security checks status" /></a>
-  <a href="CHANGELOG.md"><img src="https://img.shields.io/badge/status-v0.1.0--rc-c65b4b" alt="v0.1.0 release candidate" /></a>
+  <a href="CHANGELOG.md"><img src="https://img.shields.io/badge/status-v0.1.0-c65b4b" alt="v0.1.0 release" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-252826" alt="MIT license" /></a>
 </p>
 
@@ -193,9 +193,9 @@ Test the connection with a harmless request such as:
 
 The task should appear in the Mini App. The setup script never installs Hermes itself; plugin installation follows the [official Hermes plugin flow](https://github.com/NousResearch/hermes-agent/blob/main/website/docs/user-guide/features/plugins.md).
 
-## What is ready in the v0.1.0 release candidate
+## What is ready in v0.1.0
 
-`v0.1.0` is the debut public release candidate. The core shared-task flow is implemented and locally tested; the final release tag waits for the documented Docker runtime and real Telegram/Hermes smoke checks. Feedback, bug reports, and first contributions are welcome now.
+`v0.1.0` is the debut public release. The core shared-task flow, automated checks, and local Docker runtime are verified. Every public installation should still run its own domain/TLS and live Telegram-to-Hermes smoke test. Feedback, bug reports, and first contributions are welcome.
 
 - one shared workspace with admin and member roles;
 - task creation, editing, completion, recovery, and archive;

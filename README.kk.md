@@ -9,7 +9,7 @@
 <p>
   <a href="https://github.com/flufox/jnicq-hermes-todolist/actions/workflows/ci.yml"><img src="https://github.com/flufox/jnicq-hermes-todolist/actions/workflows/ci.yml/badge.svg" alt="CI күйі" /></a>
   <a href="https://github.com/flufox/jnicq-hermes-todolist/actions/workflows/security.yml"><img src="https://github.com/flufox/jnicq-hermes-todolist/actions/workflows/security.yml/badge.svg" alt="Қауіпсіздік тексерулерінің күйі" /></a>
-  <a href="CHANGELOG.md"><img src="https://img.shields.io/badge/status-v0.1.0--rc-c65b4b" alt="v0.1.0 релиз кандидаты" /></a>
+  <a href="CHANGELOG.md"><img src="https://img.shields.io/badge/status-v0.1.0-c65b4b" alt="v0.1.0 релизі" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-252826" alt="MIT лицензиясы" /></a>
 </p>
 
@@ -173,9 +173,9 @@ hermes gateway restart
 
 Тапсырма Mini App ішінде пайда болуы керек. Орнатқыш Hermes-тің өзін орнатпайды; плагин [Hermes-тің ресми плагин тәртібімен](https://github.com/NousResearch/hermes-agent/blob/main/website/docs/user-guide/features/plugins.md) қосылады.
 
-## v0.1.0 релиз кандидатында не дайын
+## v0.1.0 нұсқасында не бар
 
-`v0.1.0` — алғашқы ашық релиз кандидаты. Ортақ тапсырмалар ағыны іске асырылып, жергілікті жерде тексерілді; соңғы тег нақты Docker runtime және Telegram/Hermes smoke test нәтижелерін күтеді. Қазірдің өзінде кері байланыс, қате туралы хабарламалар және алғашқы үлестер қабылданады.
+`v0.1.0` — алғашқы ашық релиз. Ортақ тапсырмалар ағыны, автоматты тексерулер және жергілікті Docker runtime тексерілді. Әр public орнатуда өз доменін/TLS және нақты Telegram-to-Hermes ағынын бөлек тексеру қажет. Кері байланыс, қате туралы хабарламалар және алғашқы үлестер қабылданады.
 
 - admin және member рөлдері бар бір ортақ кеңістік;
 - тапсырманы жасау, өңдеу, аяқтау, қалпына келтіру және архивтеу;

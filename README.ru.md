@@ -9,7 +9,7 @@
 <p>
   <a href="https://github.com/flufox/jnicq-hermes-todolist/actions/workflows/ci.yml"><img src="https://github.com/flufox/jnicq-hermes-todolist/actions/workflows/ci.yml/badge.svg" alt="Статус CI" /></a>
   <a href="https://github.com/flufox/jnicq-hermes-todolist/actions/workflows/security.yml"><img src="https://github.com/flufox/jnicq-hermes-todolist/actions/workflows/security.yml/badge.svg" alt="Статус security-проверок" /></a>
-  <a href="CHANGELOG.md"><img src="https://img.shields.io/badge/status-v0.1.0--rc-c65b4b" alt="Релиз-кандидат v0.1.0" /></a>
+  <a href="CHANGELOG.md"><img src="https://img.shields.io/badge/status-v0.1.0-c65b4b" alt="Релиз v0.1.0" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-252826" alt="Лицензия MIT" /></a>
 </p>
 
@@ -192,9 +192,9 @@ hermes gateway restart
 
 Задача должна появиться в Mini App. Установщик не ставит сам Hermes; плагин подключается через [официальный механизм Hermes](https://github.com/NousResearch/hermes-agent/blob/main/website/docs/user-guide/features/plugins.md).
 
-## Что готово в релиз-кандидате v0.1.0
+## Что готово в v0.1.0
 
-`v0.1.0` — дебютный публичный релиз-кандидат. Основной сценарий общих задач реализован и проверен локально; финальный тег ждёт описанных ниже проверок реального Docker runtime и связки Telegram/Hermes. Уже сейчас будем рады обратной связи, баг-репортам и первым контрибьюторам.
+`v0.1.0` — дебютный публичный релиз. Основной сценарий общих задач, автоматические проверки и локальный Docker runtime проверены. Для каждой публичной установки всё равно нужно отдельно проверить свой домен/TLS и живую связку Telegram с Hermes. Будем рады обратной связи, баг-репортам и первым контрибьюторам.
 
 - одно общее пространство с ролями администратора и участника;
 - создание, редактирование, выполнение, восстановление и архив задач;

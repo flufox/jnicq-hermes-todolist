@@ -9,7 +9,7 @@
 <p>
   <a href="https://github.com/flufox/jnicq-hermes-todolist/actions/workflows/ci.yml"><img src="https://github.com/flufox/jnicq-hermes-todolist/actions/workflows/ci.yml/badge.svg" alt="สถานะ CI" /></a>
   <a href="https://github.com/flufox/jnicq-hermes-todolist/actions/workflows/security.yml"><img src="https://github.com/flufox/jnicq-hermes-todolist/actions/workflows/security.yml/badge.svg" alt="สถานะการตรวจสอบความปลอดภัย" /></a>
-  <a href="CHANGELOG.md"><img src="https://img.shields.io/badge/status-v0.1.0--rc-c65b4b" alt="รุ่นทดสอบ v0.1.0" /></a>
+  <a href="CHANGELOG.md"><img src="https://img.shields.io/badge/status-v0.1.0-c65b4b" alt="รุ่น v0.1.0" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-252826" alt="สัญญาอนุญาต MIT" /></a>
 </p>
 
@@ -173,9 +173,9 @@ hermes gateway restart
 
 งานควรปรากฏใน Mini App สคริปต์ติดตั้งไม่ได้ติดตั้ง Hermes เอง การติดตั้งปลั๊กอินใช้[ขั้นตอนปลั๊กอินอย่างเป็นทางการของ Hermes](https://github.com/NousResearch/hermes-agent/blob/main/website/docs/user-guide/features/plugins.md)
 
-## สิ่งที่พร้อมในรุ่นทดสอบ v0.1.0
+## สิ่งที่มีใน v0.1.0
 
-`v0.1.0` คือรุ่นทดสอบสาธารณะครั้งแรก ขั้นตอนหลักของงานร่วมถูกสร้างและทดสอบบนเครื่องแล้ว ส่วนแท็กสุดท้ายยังรอการทดสอบ Docker runtime จริงและการเชื่อม Telegram/Hermes ขณะนี้ยินดีรับคำติชม รายงานบั๊ก และ contribution แรก ๆ
+`v0.1.0` คือรุ่นสาธารณะครั้งแรก ขั้นตอนหลักของงานร่วม การตรวจสอบอัตโนมัติ และ Docker runtime บนเครื่องได้รับการตรวจสอบแล้ว การติดตั้งสาธารณะแต่ละแห่งยังควรทดสอบโดเมน/TLS ของตนเองและการทำงานจริงจาก Telegram ไปยัง Hermes เรายินดีรับคำติชม รายงานบั๊ก และ contribution แรก ๆ
 
 - พื้นที่ทำงานร่วมหนึ่งแห่ง พร้อมบทบาท admin และ member;
 - สร้าง แก้ไข ทำเสร็จ กู้คืน และเก็บงานถาวร;

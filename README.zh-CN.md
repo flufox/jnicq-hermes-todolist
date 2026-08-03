@@ -9,7 +9,7 @@
 <p>
   <a href="https://github.com/flufox/jnicq-hermes-todolist/actions/workflows/ci.yml"><img src="https://github.com/flufox/jnicq-hermes-todolist/actions/workflows/ci.yml/badge.svg" alt="CI 状态" /></a>
   <a href="https://github.com/flufox/jnicq-hermes-todolist/actions/workflows/security.yml"><img src="https://github.com/flufox/jnicq-hermes-todolist/actions/workflows/security.yml/badge.svg" alt="安全检查状态" /></a>
-  <a href="CHANGELOG.md"><img src="https://img.shields.io/badge/status-v0.1.0--rc-c65b4b" alt="v0.1.0 候选版本" /></a>
+  <a href="CHANGELOG.md"><img src="https://img.shields.io/badge/status-v0.1.0-c65b4b" alt="v0.1.0 正式版本" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-252826" alt="MIT 许可证" /></a>
 </p>
 
@@ -173,9 +173,9 @@ hermes gateway restart
 
 任务应出现在 Mini App 中。安装脚本不会安装 Hermes 本身；插件安装遵循 [Hermes 官方插件流程](https://github.com/NousResearch/hermes-agent/blob/main/website/docs/user-guide/features/plugins.md)。
 
-## v0.1.0 候选版本包含什么
+## v0.1.0 包含什么
 
-`v0.1.0` 是首次公开候选版本。共享任务的核心流程已经实现并完成本地测试；最终标签仍等待真实 Docker 运行环境以及 Telegram/Hermes 联调检查。现在已经欢迎反馈、错误报告和首次贡献。
+`v0.1.0` 是首次公开版本。共享任务核心流程、自动化检查和本地 Docker 运行环境均已验证。每个公开部署仍应单独验证自己的域名/TLS，以及真实的 Telegram-to-Hermes 流程。欢迎反馈、错误报告和首次贡献。
 
 - 单个共享工作区，包含管理员和成员角色；
 - 创建、编辑、完成、恢复和归档任务；
