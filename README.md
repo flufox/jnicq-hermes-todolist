@@ -1,9 +1,11 @@
 <div align="center">
 
+<p><strong>Documentation:</strong> <a href="README.ru.md">Русский</a> · <a href="README.md">English</a> · <a href="README.zh-CN.md">简体中文</a> · <a href="README.kk.md">Қазақша</a> · <a href="README.th.md">ไทย</a> · <a href="README.id.md">Bahasa Indonesia</a></p>
+
 <h1>Hermes Todo</h1>
 <p><strong>Turn every Hermes conversation into a shared plan.</strong></p>
 <p>Send Hermes a message or a voice note. Tasks, people, and dates appear in one simple calendar that everyone can see and update together.</p>
-<p><a href="#from-conversation-to-action">See how it works</a> · <a href="#try-it-locally">Try the demo</a> · <a href="#install-for-real">Install with Docker</a> · <a href="README.ru.md">Русская версия</a></p>
+<p><a href="#from-conversation-to-action">See how it works</a> · <a href="#try-it-locally">Try the demo</a> · <a href="#install-for-real">Install with Docker</a></p>
 <p>
   <a href="https://github.com/flufox/jnicq-hermes-todolist/actions/workflows/ci.yml"><img src="https://github.com/flufox/jnicq-hermes-todolist/actions/workflows/ci.yml/badge.svg" alt="CI status" /></a>
   <a href="https://github.com/flufox/jnicq-hermes-todolist/actions/workflows/security.yml"><img src="https://github.com/flufox/jnicq-hermes-todolist/actions/workflows/security.yml/badge.svg" alt="Security checks status" /></a>
